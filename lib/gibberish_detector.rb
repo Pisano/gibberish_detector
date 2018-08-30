@@ -6,7 +6,8 @@ class GibberishDetectorException < Exception ; end
 
 class GibberishDetector
   ACCEPTED_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz ';
-  DATA_FILE = File.join(File.dirname(__FILE__), '..', 'trained_data.yml')
+  GIBBERISH_PATH      = File.join(File.dirname(__FILE__), '..')
+  DATA_FILE           = File.join(GIBBERISH_PATH, 'trained_data.yml')
 
   class << self
     def gibberish?(text, opts = {})
@@ -27,10 +28,10 @@ class GibberishDetector
     end
 
     def train!(opts={})
-      opts[:big_text_file] = 'big.txt'
-      opts[:good_text_file] = 'good.txt'
-      opts[:bad_text_file] = 'bad.txt'
-      opts[:lib_path] = DATA_FILE
+      opts[:big_text_file]  = File.join(GIBBERISH_PATH, 'big.txt')
+      opts[:good_text_file] = File.join(GIBBERISH_PATH, 'good.txt')
+      opts[:bad_text_file]  = File.join(GIBBERISH_PATH, 'bad.txt')
+      opts[:lib_path]       = DATA_FILE
 
       if File.exist?(opts[:big_text_file]) == false || File.exist?(opts[:good_text_file]) == false || File.exist?(opts[:bad_text_file]) == false
         raise GibberishDetectorException, "We couldn't find one of #{opts[:big_text_file]}, #{opts[:good_text_file]} or #{opts[:bad_text_file]}.  Please ensure all three files exist before training."
