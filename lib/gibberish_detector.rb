@@ -6,7 +6,7 @@ class GibberishDetectorException < Exception ; end
 
 class GibberishDetector
   ACCEPTED_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz ';
-  DATA_FILE = File.join(File.dirname(__FILE__), '..', '.trained_data.yml')
+  DATA_FILE = File.join(File.dirname(__FILE__), '..', 'trained_data.yml')
 
   class << self
     def gibberish?(text, opts = {})
